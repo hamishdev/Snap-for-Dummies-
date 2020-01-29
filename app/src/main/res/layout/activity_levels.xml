@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Controller.LevelsActivity">
+    tools:context=".View.levels.LevelsActivity">
 
     <Button
         android:id="@+id/Levels_9"

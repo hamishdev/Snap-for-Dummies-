@@ -1,10 +1,8 @@
 package com.example.gameapp;
 
 
-import com.example.gameapp.Model.Board;
+import com.example.gameapp.Model.Level;
 import com.example.gameapp.Model.Card;
-import com.example.gameapp.Model.CardCollections.Hand;
-import com.example.gameapp.Model.Deck;
 
 import org.junit.After;
 import org.junit.Assert;
@@ -16,11 +14,11 @@ import static org.junit.Assert.assertNotEquals;
 
 public class DeckController_test {
 
-    Board emptyBoard;
+    Level emptyLevel;
 
     @Before
     public void setUp() {
-        emptyBoard = new Board();
+        emptyLevel = new Level();
 
     }
 
@@ -30,41 +28,41 @@ public class DeckController_test {
      */
     @After
     public void tearDown() {
-        emptyBoard = null;
+        emptyLevel = null;
     }
 
     @Test
     public void test_deck() {
-        Assert.assertEquals(emptyBoard.getDeck().getPlayingPile().size(), 0);
-        Assert.assertEquals(emptyBoard.getDeck().getFreshDeck().size(),0);
-        Assert.assertEquals(emptyBoard.getDeck().getPlayerHand().size(),26);
+        Assert.assertEquals(emptyLevel.getDeck().getPlayingPile().size(), 0);
+        Assert.assertEquals(emptyLevel.getDeck().getFreshDeck().size(),0);
+        Assert.assertEquals(emptyLevel.getDeck().getPlayerHand().size(),26);
 
     }
 
     @Test
     public void test_turn() {
-        Assert.assertTrue(emptyBoard.isPlayersTurn());
+        Assert.assertTrue(emptyLevel.isPlayersTurn());
     }
 
     @Test
     public void test_flip(){
-        Assert.assertEquals(emptyBoard.getDeck().getFreshDeck().size(),0);
-        Assert.assertEquals(emptyBoard.getDeck().getPlayerHand().size(),26);
-        emptyBoard.flipFromPlayerHand();
-        Assert.assertEquals(emptyBoard.getDeck().getPlayingPile().size(),1);
+        Assert.assertEquals(emptyLevel.getDeck().getFreshDeck().size(),0);
+        Assert.assertEquals(emptyLevel.getDeck().getPlayerHand().size(),26);
+        emptyLevel.flipFromPlayerHand();
+        Assert.assertEquals(emptyLevel.getDeck().getPlayingPile().size(),1);
 
 
-        Assert.assertEquals(emptyBoard.getDeck().getPlayerHand().size(),25);
+        Assert.assertEquals(emptyLevel.getDeck().getPlayerHand().size(),25);
     }
 
     @Test
     public void test_topCardAfterFlip(){
-        Assert.assertEquals(emptyBoard.getDeck().getFreshDeck().size(),0);
-        Assert.assertEquals(emptyBoard.getDeck().getPlayerHand().size(),26);
-        emptyBoard.flipFromPlayerHand();
-        Card first = emptyBoard.getDeckController().getPlayingPileTopCard();
-        emptyBoard.flipFromPlayerHand();
-        Card second = emptyBoard.getDeckController().getPlayingPileTopCard();
+        Assert.assertEquals(emptyLevel.getDeck().getFreshDeck().size(),0);
+        Assert.assertEquals(emptyLevel.getDeck().getPlayerHand().size(),26);
+        emptyLevel.flipFromPlayerHand();
+        Card first = emptyLevel.getDeckController().getPlayingPileTopCard();
+        emptyLevel.flipFromPlayerHand();
+        Card second = emptyLevel.getDeckController().getPlayingPileTopCard();
         assertNotEquals(first,second);
 
 

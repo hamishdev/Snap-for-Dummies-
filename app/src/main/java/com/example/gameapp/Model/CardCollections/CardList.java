@@ -2,8 +2,9 @@ package com.example.gameapp.Model.CardCollections;
 
 import com.example.gameapp.Model.Card;
 
+import java.io.Serializable;
 import java.util.ArrayList;
-public class CardList extends ArrayList<Card> {
+public class CardList extends ArrayList<Card> implements Serializable {
 
     public Card getTopCard(){
         if(!this.isEmpty()){

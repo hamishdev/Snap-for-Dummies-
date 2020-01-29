@@ -1,4 +1,4 @@
-package com.example.gameapp.Controller;
+package com.example.gameapp.View.Main;
 
 
 import android.app.Activity;

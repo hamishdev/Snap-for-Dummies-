@@ -1,4 +1,4 @@
-package com.example.gameapp.Controller;
+package com.example.gameapp.View.Main;
 
 
 import android.app.Activity;
@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.gameapp.R;
+import com.example.gameapp.View.SnapLevelsActivity;
 
 public class MainActivity extends Activity {
 
@@ -27,7 +28,7 @@ public class MainActivity extends Activity {
 
                 // Start NewActivity.class
                 Intent myIntent = new Intent(MainActivity.this,
-                        LevelsActivity.class);
+                        SnapLevelsActivity.class);
                 startActivity(myIntent);
             }
         });

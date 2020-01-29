@@ -1,6 +1,8 @@
 package com.example.gameapp.Model;
 
-public class Card{
+import java.io.Serializable;
+
+public class Card implements Serializable {
 
     public enum Value{
         ACE,TWO,THREE,FOUR,FIVE,SIX,SEVEN,EIGHT,NINE,TEN,JACK,QUEEN,KING
