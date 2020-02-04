@@ -1,4 +1,4 @@
-package com.example.gameapp.Model;
+package com.example.gameapp.model;
 
 public class Points {
 

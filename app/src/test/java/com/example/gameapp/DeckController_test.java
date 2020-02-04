@@ -1,8 +1,8 @@
 package com.example.gameapp;
 
 
-import com.example.gameapp.Model.Level;
-import com.example.gameapp.Model.Card;
+import com.example.gameapp.model.Level;
+import com.example.gameapp.model.Card;
 
 import org.junit.After;
 import org.junit.Assert;

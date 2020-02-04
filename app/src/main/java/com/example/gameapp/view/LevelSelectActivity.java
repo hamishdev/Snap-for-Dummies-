@@ -1,4 +1,4 @@
-package com.example.gameapp.View;
+package com.example.gameapp.view;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -6,27 +6,39 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.gameapp.Model.Card;
-import com.example.gameapp.Model.Game;
-import com.example.gameapp.Presenter.MainPresenter;
+//import androidx.databinding.DataBindingUtil;
+
+import androidx.databinding.DataBindingUtil;
+
+
+import com.example.gameapp.databinding.ActivityLevelsSelectBinding;
+import com.example.gameapp.model.Card;
+import com.example.gameapp.model.LevelSelector;
+import com.example.gameapp.presenter.LevelSelectPresenter;
 import com.example.gameapp.R;
-import com.example.gameapp.View.levels.level1Activity;
-import com.example.gameapp.View.levels.level2Activity;
 
 import java.util.ArrayList;
 
-public class SnapLevelsActivity extends Activity implements SnapLevelsView {
+public class LevelSelectActivity extends Activity implements SnapLevelsView {
 
 
     ArrayList<Button> buttons;
-    Game model = new Game();
-    MainPresenter presenter = new MainPresenter(this,model);
+    LevelSelector model;
+    String gameState;
+    LevelSelectPresenter presenter;
 
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
+        if (savedInstanceState == null) {
+            //gameState = savedInstanceState.getString(GAME_STATE_KEY);
+            model = new LevelSelector();
+        }
 
-        setContentView(R.layout.activity_levels);
+        presenter = new LevelSelectPresenter(this,model);
+        ActivityLevelsSelectBinding binding = DataBindingUtil.setContentView(this,R.layout.activity_levels_select);
+        binding.setLevelSelector(model);
+
         // Locate the level1button in activity_main.xml
 
         ArrayList<Button> buttons = new ArrayList<Button>() {
@@ -42,7 +54,7 @@ public class SnapLevelsActivity extends Activity implements SnapLevelsView {
                 add((Button)findViewById(R.id.Levels_9));
                 add((Button)findViewById(R.id.Levels_10));
                 add((Button)findViewById(R.id.Levels_11));
-                add((Button)findViewById(R.id.Levels_12));
+                //add((Button)findViewById(R.id.Levels_12));
 
             }
 
@@ -58,6 +70,14 @@ public class SnapLevelsActivity extends Activity implements SnapLevelsView {
             });
         }
 
+        findViewById(R.id.Levels_12).setOnClickListener(new View.OnClickListener() {
+            public void onClick(View arg0) {
+                model.levelUpTo.set(model.levelUpTo.get()+1);
+
+            }
+        });
+
+
 
     }
 
@@ -67,30 +87,40 @@ public class SnapLevelsActivity extends Activity implements SnapLevelsView {
 
     }
 
+    static final int START_LEVEL =1;
+
     public void startLevel(int levelNumber){
         Intent levelIntent = getLevelIntent(levelNumber);
-        levelIntent.putExtra("model",model);
-        startActivity(levelIntent);
+        startActivityForResult(levelIntent,START_LEVEL);
+
 
 
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // Check which request we're responding to
+        if (requestCode == START_LEVEL) {
+            // Make sure the request was successful
+            if (resultCode == RESULT_OK) {
+                boolean win = data.getBooleanExtra("win",false);
+                presenter.levelEnded(win);
+            }
+        }
+    }
     private Intent getLevelIntent(int levelNumber) {
         switch(levelNumber){
             case 1:
-                return new Intent(SnapLevelsActivity.this,
+                return new Intent(LevelSelectActivity.this,
                         level1Activity.class);
             case 2:
-                return new Intent(SnapLevelsActivity.this,
+                return new Intent(LevelSelectActivity.this,
                         level2Activity.class);
 
         }
         return null;
     }
 
-    public void setActivity(Activity activity){
-
-    }
 
     @Override
     public void setCard(Card topCard) {

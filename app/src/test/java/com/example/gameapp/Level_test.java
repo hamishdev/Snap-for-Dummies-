@@ -1,15 +1,15 @@
 package com.example.gameapp;
 
 
-import com.example.gameapp.Model.Level;
-import com.example.gameapp.Model.Card;
+import com.example.gameapp.model.Level;
+import com.example.gameapp.model.Card;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import static com.example.gameapp.Model.Card.Value.ACE;
-import static com.example.gameapp.Model.Card.Value.SEVEN;
+import static com.example.gameapp.model.Card.Value.ACE;
+import static com.example.gameapp.model.Card.Value.SEVEN;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;

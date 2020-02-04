@@ -1,12 +1,8 @@
-package com.example.gameapp.Model;
+package com.example.gameapp.model;
 
-import android.util.Log;
-
-import com.example.gameapp.Model.CardCollections.CardList;
-import com.example.gameapp.Model.CardCollections.PlayingPile;
+import com.example.gameapp.model.cardcollections.CardList;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.EnumSet;
 

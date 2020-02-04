@@ -12,17 +12,18 @@
         android:screenOrientation="portrait"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".View.levels.level1Activity"></activity>
-        <activity android:name=".View.Main.SplashScreenActivity">
+        <activity android:name=".view.level1Activity"></activity>
+        <activity android:name=".view.level2Activity"></activity>
+        <activity android:name=".view.SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".View.Main.MainActivity"></activity>
-        <activity android:name=".View.SnapLevelsActivity"></activity>
-        <activity android:name=".View.levels.baseLevelActivity"></activity>
+        <activity android:name=".view.MainActivity"></activity>
+        <activity android:name=".view.LevelSelectActivity"></activity>
+        <activity android:name=".view.baseLevelActivity"></activity>
 
     </application>
 

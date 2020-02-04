@@ -1,11 +1,8 @@
-package com.example.gameapp.Presenter;
+package com.example.gameapp.presenter;
 
 import java.io.Serializable;
 
 public interface Presenter extends Serializable {
 
-    void onCreate();
-    void onPause();
-    void onResume();
-    void onDestroy();
+
 }

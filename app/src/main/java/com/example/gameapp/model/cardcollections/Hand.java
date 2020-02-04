@@ -1,4 +1,4 @@
-package com.example.gameapp.Model.CardCollections;
+package com.example.gameapp.model.cardcollections;
 
 public class Hand extends CardList {
 }

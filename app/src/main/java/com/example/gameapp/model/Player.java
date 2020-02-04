@@ -1,9 +1,8 @@
-package com.example.gameapp.Model;
+package com.example.gameapp.model;
 
-import com.example.gameapp.Model.CardCollections.CardList;
+import com.example.gameapp.model.cardcollections.CardList;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 
 public class Player implements Serializable {
 

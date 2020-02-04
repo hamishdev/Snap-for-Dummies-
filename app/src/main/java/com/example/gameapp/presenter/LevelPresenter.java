@@ -1,50 +1,27 @@
-package com.example.gameapp.Presenter;
+package com.example.gameapp.presenter;
 
-import android.graphics.ColorSpace;
-
-import com.example.gameapp.Model.Card;
-import com.example.gameapp.Model.Game;
-import com.example.gameapp.View.SnapLevelsView;
-import com.example.gameapp.View.levels.LevelsView;
+import com.example.gameapp.model.Card;
+import com.example.gameapp.model.Level;
+import com.example.gameapp.view.LevelsView;
 
 import java.io.Serializable;
 
 public class LevelPresenter implements Presenter, Serializable {
 
     private LevelsView view;
-    private Game model;
+    private Level model;
 
-    public LevelPresenter(LevelsView _view, Game _model){
+    public LevelPresenter(LevelsView _view){
         this.view = _view;
-        this.model= _model;
-
+        model = new Level();
     }
 
-    @Override
-    public void onCreate() {
-
-    }
-
-    @Override
-    public void onPause() {
-
-    }
-
-    @Override
-    public void onResume() {
-
-    }
-
-    @Override
-    public void onDestroy() {
-
-    }
 
     // Update
     // playing pile
     // Player total
     public void onPlayerFlip(){
-        if(model.flipCard("player")){
+        if(model.flipFromPlayerHand()){
             updateOnCardFlipped();
             newTurn();
         }
@@ -53,13 +30,13 @@ public class LevelPresenter implements Presenter, Serializable {
 
     private void newTurn() {
         view.computerSnapIfCan();
-        if(model.computerTurn()){
+        if(!model.isPlayersTurn()){
             view.computerFlip();
         }
     }
 
     public void onComputerFlip() {
-        if(model.flipCard("computer")) {
+        if(model.flipFromComputerHand()) {
             updateOnCardFlipped();
             newTurn();
         }
@@ -76,8 +53,8 @@ public class LevelPresenter implements Presenter, Serializable {
         update cardtotals
      */
     public void onPlayerSnap(){
-        model.snap("player");
-        if(!model.checkWon()){
+        model.playerSnap();
+        if(!model.levelFinished()){
             updateOnCardFlipped();
             newTurn();
         }
@@ -87,8 +64,8 @@ gameOver();}
 
     public void computerSnapIfCan(){
         if(model.checkSnap()) {
-            model.snap("computer");
-            if (!model.checkWon()) {
+            model.computerSnap();
+            if (!model.levelFinished()) {
                 updateOnCardFlipped();
                 newTurn();
             } else {
@@ -101,8 +78,6 @@ gameOver();}
 
     public void gameOver(){
         view.gameOver(model.playerWon());// boolean whether player has won
-        model.finishedLevel(model.playerWon());
-
     }
     /*
     Gets top card from model, updates view,
@@ -111,10 +86,11 @@ gameOver();}
     public void updateOnCardFlipped(){
         Card topCard = model.getTopCard();
         view.setPlayingCard(topCard);
-        view.setTotals(model.getPlayerTotal(),model.getComputerTotal(),model.getPileTotal());
+        view.setTotals(model.getPlayerTotal(),model.getCompTotal(),model.getPileTotal());
     }
 
 
-
-
+    public void winLevel() {
+        model.winLevel();
+    }
 }

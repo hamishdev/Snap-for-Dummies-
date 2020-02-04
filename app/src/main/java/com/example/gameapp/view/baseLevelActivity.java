@@ -1,40 +1,25 @@
-package com.example.gameapp.View.levels;
+package com.example.gameapp.view;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.widget.TextView;
 
-import com.example.gameapp.Model.Card;
-import com.example.gameapp.Model.Game;
-import com.example.gameapp.Model.Points;
-import com.example.gameapp.Model.Level;
-import com.example.gameapp.Presenter.LevelPresenter;
-import com.example.gameapp.Presenter.Presenter;
+import com.example.gameapp.model.Card;
+import com.example.gameapp.presenter.LevelPresenter;
 import com.example.gameapp.R;
-import com.example.gameapp.View.Main.MainActivity;
-import com.example.gameapp.View.SnapLevelsActivity;
-
-import java.io.Serializable;
 
 public abstract class baseLevelActivity extends Activity implements LevelsView {
 
 
-    Game model;
+
     LevelPresenter presenter;
+    int levelNumber;
     @Override
     public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
         setContentView(getLayoutResourceId());
-        getModel();
-        presenter = new LevelPresenter(this, model);
-
-    }
-
-    private void getModel() {
-        // Have to figure out how this works on all ways of getting to activity
-            model = (Game)getIntent().getSerializableExtra("model");
+        presenter = new LevelPresenter(this);
 
     }
 
@@ -62,9 +47,11 @@ public abstract class baseLevelActivity extends Activity implements LevelsView {
         }
         else{postLostMessage();}
         // Start NewActivity.class
-        Intent myIntent = new Intent(baseLevelActivity.this,
-                SnapLevelsActivity.class);
-        startActivity(myIntent);
+        Intent data = new Intent();
+//---set the data to pass back---
+        data.putExtra("win",playerWon);
+        setResult(RESULT_OK, data);
+        finish();
     }
 
     public void postWonMessage(){

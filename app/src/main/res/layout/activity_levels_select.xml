@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".View.levels.LevelsActivity">
+    tools:context=".view.view.LevelsActivity">
+    <data >
+        <variable name="levelSelector" type="com.example.gameapp.model.LevelSelector"/>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
     <Button
         android:id="@+id/Levels_9"
@@ -14,7 +19,8 @@
         android:layout_marginTop="335dp"
         android:text="9"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+       />
 
     <Button
         android:id="@+id/Levels_3"
@@ -24,7 +30,8 @@
         android:layout_marginTop="76dp"
         android:text="3"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+ />
 
     <Button
         android:id="@+id/Levels_4"
@@ -34,7 +41,8 @@
         android:layout_marginTop="208dp"
         android:text="4"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+   />
 
     <Button
         android:id="@+id/Levels_5"
@@ -103,8 +111,7 @@
         android:layout_width="79dp"
         android:layout_height="79dp"
         android:layout_marginStart="100dp"
-        android:layout_marginTop="459dp
-"
+        android:layout_marginTop="459dp"
         android:text="10"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -130,4 +137,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+        <TextView
+            android:id="@+id/LevelStatus"
+            android:layout_width="72dp"
+            android:layout_height="60dp"
+            android:text="@{String.valueOf(levelSelector.levelUpTo)}"
+            android:textSize="36sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.866"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.87" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

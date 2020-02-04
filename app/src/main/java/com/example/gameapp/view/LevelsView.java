@@ -1,6 +1,6 @@
-package com.example.gameapp.View.levels;
+package com.example.gameapp.view;
 
-import com.example.gameapp.Model.Card;
+import com.example.gameapp.model.Card;
 
 public interface LevelsView {
     void setPlayingCard(Card topCard);

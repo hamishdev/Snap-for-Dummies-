@@ -1,7 +1,6 @@
-package com.example.gameapp.Model.CardCollections;
+package com.example.gameapp.model.cardcollections;
 
-import com.example.gameapp.Model.Card;
-import com.example.gameapp.Model.CardCollections.CardList;
+import com.example.gameapp.model.Card;
 
 public class PlayingPile extends CardList {
 

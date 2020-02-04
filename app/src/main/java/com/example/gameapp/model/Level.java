@@ -1,7 +1,6 @@
-package com.example.gameapp.Model;
+package com.example.gameapp.model;
 
-import com.example.gameapp.Model.CardCollections.CardList;
-import com.example.gameapp.Model.CardCollections.PlayingPile;
+import com.example.gameapp.model.cardcollections.PlayingPile;
 import java.io.Serializable;
 
 
@@ -16,9 +15,8 @@ public class Level implements Serializable{
     int levelNumber;
     public boolean playerWon; //To set hackily for debugging purposes
 
-    public Level(int levelNumber){
+    public Level(){
 
-        this.levelNumber = levelNumber;
 
         player1=new Player();
         computer= new Player();
@@ -32,7 +30,7 @@ public class Level implements Serializable{
     }
 
     public boolean playerWon() {
-        return(player1.hand.size()==52); //Gameover and you have 52 cards
+        return playerWon||(player1.hand.size()==52); //Gameover and you have 52 cards
     }
 
     public boolean computerWon() {
@@ -43,7 +41,9 @@ public class Level implements Serializable{
         return (playerWon()||computerWon()||playerWon);
     }
 
-
+    public Card getTopCard(){
+        return playingPile.getTopCard();
+    }
 
     enum Turn{COMPUTER,PLAYER}
 
@@ -60,13 +60,15 @@ public class Level implements Serializable{
     }
 
     public int getCompTotal() {
-        return player1.hand.size();
-    }
-
-    public int getPlayerTotal() {
         return computer.hand.size();
     }
 
+    public int getPlayerTotal() {
+        return player1.hand.size();
+    }
+    public int getPileTotal() {
+        return playingPile.size();
+    }
 
     //actions
 
@@ -180,6 +182,10 @@ public class Level implements Serializable{
             return true;
         }
         else return false;
+    }
+
+    public void winLevel(){
+        playerWon=true;
     }
 
 }

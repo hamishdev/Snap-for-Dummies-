@@ -1,8 +1,8 @@
 package com.example.gameapp;
 
-import com.example.gameapp.Model.Card;
-import com.example.gameapp.Model.CardCollections.Hand;
-import com.example.gameapp.Model.Deck;
+import com.example.gameapp.model.Card;
+import com.example.gameapp.model.cardcollections.Hand;
+import com.example.gameapp.model.Deck;
 
 import org.junit.After;
 import org.junit.Before;

@@ -1,4 +1,4 @@
-package com.example.gameapp.View.levels;
+package com.example.gameapp.view;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -12,6 +12,7 @@ public class level1Activity extends baseLevelActivity {
 
     Button snap_button;
     Button flipCard_button;
+    Button winGame_button;
 
 
     @Override
@@ -21,6 +22,7 @@ public class level1Activity extends baseLevelActivity {
 
         snap_button = (Button) findViewById(R.id.snap);
         flipCard_button = (Button) findViewById(R.id.flip_card);
+        winGame_button = (Button) findViewById(R.id.win_game);
 
         // do extra stuff on your resources, using findViewById on your layout_for_activity1
         // Capture button clicks
@@ -40,6 +42,13 @@ public class level1Activity extends baseLevelActivity {
         flipCard_button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View arg0) {
                presenter.onPlayerFlip();
+            }
+        });
+
+
+        winGame_button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View arg0) {
+                presenter.winLevel();
             }
         });
     }

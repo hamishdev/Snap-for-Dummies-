@@ -1,6 +1,6 @@
-package com.example.gameapp.View;
+package com.example.gameapp.view;
 
-import com.example.gameapp.Model.Card;
+import com.example.gameapp.model.Card;
 
 public interface SnapLevelsView {
     void startLevel(int levelNumber);
