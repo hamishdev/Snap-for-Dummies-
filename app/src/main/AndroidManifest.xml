@@ -14,6 +14,8 @@
 
         <activity android:name=".view.level1Activity"></activity>
         <activity android:name=".view.level2Activity"></activity>
+        <activity android:name=".view.level3Activity"></activity>
+
         <activity android:name=".view.SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

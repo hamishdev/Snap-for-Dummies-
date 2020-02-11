@@ -8,9 +8,7 @@ import android.widget.Button;
 import com.example.gameapp.R;
 import com.example.gameapp.model.Card;
 
-public class level1Activity extends baseLevelActivity {
-
-
+public class level3Activity extends baseLevelActivity {
 
 
 
@@ -19,7 +17,6 @@ public class level1Activity extends baseLevelActivity {
         super.onCreate(bundle);
 
     }
-
 
 
 
@@ -34,11 +31,8 @@ public class level1Activity extends baseLevelActivity {
     }
 
     public void computerSnapIfCan(){
-        super.computerSnapIfCan(1200);
+       super.computerSnapIfCan(600);
     }
-
-
-
 
 
 }

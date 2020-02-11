@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <layout xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".view.view.LevelsActivity">
+>
+
     <data >
         <variable name="levelSelector" type="com.example.gameapp.model.LevelSelector"/>
     </data>
@@ -11,131 +12,47 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/Levels_9"
-        android:layout_width="79dp"
-        android:layout_height="79dp"
-        android:layout_marginStart="283dp"
-        android:layout_marginTop="335dp"
-        android:text="9"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-       />
 
-    <Button
-        android:id="@+id/Levels_3"
-        android:layout_width="79dp"
-        android:layout_height="79dp"
-        android:layout_marginStart="283dp"
-        android:layout_marginTop="76dp"
-        android:text="3"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
- />
+        <Button
 
-    <Button
-        android:id="@+id/Levels_4"
-        android:layout_width="79dp"
-        android:layout_height="79dp"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="208dp"
-        android:text="4"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-   />
+            android:id="@+id/Levels_3"
+            android:layout_width="150dp"
+            android:layout_height="131dp"
+            android:layout_marginTop="488dp"
+            android:tag="3"
+            android:text="@{levelSelector.levelUpTo&gt;=3 ? String.valueOf(3) : @string/lock}"
+            android:background="@{levelSelector.levelUpTo&gt;=3 ? @color/white : @color/gray}"
 
-    <Button
-        android:id="@+id/Levels_5"
-        android:layout_width="79dp"
-        android:layout_height="79dp"
-        android:layout_marginStart="166dp"
-        android:layout_marginTop="208dp"
-        android:text="5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/Levels_11"
-        android:layout_width="79dp"
-        android:layout_height="79dp"
-        android:layout_marginStart="226dp"
-        android:layout_marginTop="459dp"
-        android:text="11"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <Button
+            android:id="@+id/Levels_2"
+            android:layout_width="154dp"
+            android:layout_height="153dp"
+            android:layout_marginTop="256dp"
+            android:background="@{levelSelector.levelUpTo&gt;=2 ? @color/white : @color/gray}"
+            android:tag="2"
+            android:text="@{levelSelector.levelUpTo&gt;=2 ? String.valueOf(2) : @string/lock}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/Levels_6"
-        android:layout_width="79dp"
-        android:layout_height="79dp"
-        android:layout_marginStart="283dp"
-        android:layout_marginTop="208dp"
-        android:text="6"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/Levels_12"
-        android:layout_width="79dp"
-        android:layout_height="79dp"
-        android:layout_marginStart="166dp"
-        android:layout_marginTop="582dp"
-        android:layout_marginBottom="70dp"
-        android:text="12"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/Levels_2"
-        android:layout_width="79dp"
-        android:layout_height="79dp"
-        android:layout_marginStart="166dp"
-        android:layout_marginTop="76dp"
-        android:text="2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/Levels_7"
-        android:layout_width="79dp"
-        android:layout_height="79dp"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="335dp"
-        android:text="7"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/Levels_10"
-        android:layout_width="79dp"
-        android:layout_height="79dp"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="459dp"
-        android:text="10"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/Levels_1"
-        android:layout_width="79dp"
-        android:layout_height="79dp"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="76dp"
-        android:backgroundTint="#FFFFFF"
-        android:text="1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/Levels_8"
-        android:layout_width="79dp"
-        android:layout_height="79dp"
-        android:layout_marginStart="166dp"
-        android:layout_marginTop="335dp"
-        android:text="8"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <Button
+            android:id="@+id/Levels_1"
+            android:layout_width="146dp"
+            android:layout_height="138dp"
+            android:layout_marginTop="64dp"
+            android:backgroundTint="#FFFFFF"
+            android:tag="1"
+            android:text="1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/LevelStatus"
@@ -145,10 +62,10 @@
             android:textSize="36sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.866"
+            app:layout_constraintHorizontal_bias="0.103"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.87" />
+            app:layout_constraintVertical_bias="0.168" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

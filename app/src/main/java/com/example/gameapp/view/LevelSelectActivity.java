@@ -13,6 +13,7 @@ import androidx.databinding.DataBindingUtil;
 
 import com.example.gameapp.databinding.ActivityLevelsSelectBinding;
 import com.example.gameapp.model.Card;
+import com.example.gameapp.model.Level;
 import com.example.gameapp.model.LevelSelector;
 import com.example.gameapp.presenter.LevelSelectPresenter;
 import com.example.gameapp.R;
@@ -22,9 +23,7 @@ import java.util.ArrayList;
 public class LevelSelectActivity extends Activity implements SnapLevelsView {
 
 
-    ArrayList<Button> buttons;
     LevelSelector model;
-    String gameState;
     LevelSelectPresenter presenter;
 
     @Override
@@ -46,14 +45,6 @@ public class LevelSelectActivity extends Activity implements SnapLevelsView {
                 add((Button)findViewById(R.id.Levels_1));
                 add((Button)findViewById(R.id.Levels_2));
                 add((Button)findViewById(R.id.Levels_3));
-                add((Button)findViewById(R.id.Levels_4));
-                add((Button)findViewById(R.id.Levels_5));
-                add((Button)findViewById(R.id.Levels_6));
-                add((Button)findViewById(R.id.Levels_7));
-                add((Button)findViewById(R.id.Levels_8));
-                add((Button)findViewById(R.id.Levels_9));
-                add((Button)findViewById(R.id.Levels_10));
-                add((Button)findViewById(R.id.Levels_11));
                 //add((Button)findViewById(R.id.Levels_12));
 
             }
@@ -64,20 +55,11 @@ public class LevelSelectActivity extends Activity implements SnapLevelsView {
             // Capture level1button clicks
             button.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View arg0) {
-                    onLevelClicked(Integer.parseInt((String)button.getText()));
+                    onLevelClicked(Integer.parseInt((String)button.getTag()));
 
                 }
             });
         }
-
-        findViewById(R.id.Levels_12).setOnClickListener(new View.OnClickListener() {
-            public void onClick(View arg0) {
-                model.levelUpTo.set(model.levelUpTo.get()+1);
-
-            }
-        });
-
-
 
     }
 
@@ -116,14 +98,12 @@ public class LevelSelectActivity extends Activity implements SnapLevelsView {
             case 2:
                 return new Intent(LevelSelectActivity.this,
                         level2Activity.class);
+            case 3:
+                return new Intent(LevelSelectActivity.this, level3Activity.class);
 
         }
         return null;
     }
 
 
-    @Override
-    public void setCard(Card topCard) {
-
-    }
 }

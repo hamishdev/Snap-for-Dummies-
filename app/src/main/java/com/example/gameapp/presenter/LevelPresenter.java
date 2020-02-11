@@ -11,11 +11,10 @@ public class LevelPresenter implements Presenter, Serializable {
     private LevelsView view;
     private Level model;
 
-    public LevelPresenter(LevelsView _view){
+    public LevelPresenter(LevelsView _view, Level level){
         this.view = _view;
-        model = new Level();
+        model = level;
     }
-
 
     // Update
     // playing pile
@@ -23,22 +22,26 @@ public class LevelPresenter implements Presenter, Serializable {
     public void onPlayerFlip(){
         if(model.flipFromPlayerHand()){
             updateOnCardFlipped();
-            newTurn();
+            model.stopComputerTimer();
         }
 
-    }
-
-    private void newTurn() {
-        view.computerSnapIfCan();
-        if(!model.isPlayersTurn()){
-            view.computerFlip();
-        }
     }
 
     public void onComputerFlip() {
         if(model.flipFromComputerHand()) {
             updateOnCardFlipped();
-            newTurn();
+            model.startComputerTimer();
+        }
+    }
+
+    public void newTurn() {
+        //Computer tries to snap even when they flip
+        if(model.checkSnap()) {
+            view.computerSnapIfCan();
+        }
+        //Computer tries to flip even when they flip
+        else if(!model.isPlayersTurn()){
+            view.computerFlip(model.getPlayerDelay());
         }
     }
 
@@ -56,10 +59,8 @@ public class LevelPresenter implements Presenter, Serializable {
         model.playerSnap();
         if(!model.levelFinished()){
             updateOnCardFlipped();
-            newTurn();
         }
-        else{
-gameOver();}
+        else{ gameOver(); }
     }
 
     public void computerSnapIfCan(){
@@ -67,11 +68,8 @@ gameOver();}
             model.computerSnap();
             if (!model.levelFinished()) {
                 updateOnCardFlipped();
-                newTurn();
-            } else {
-                gameOver();
-
             }
+            else { gameOver(); }
         }
 
     }
@@ -79,6 +77,7 @@ gameOver();}
     public void gameOver(){
         view.gameOver(model.playerWon());// boolean whether player has won
     }
+
     /*
     Gets top card from model, updates view,
     Gets cardTotals from model, updates view
@@ -87,6 +86,7 @@ gameOver();}
         Card topCard = model.getTopCard();
         view.setPlayingCard(topCard);
         view.setTotals(model.getPlayerTotal(),model.getCompTotal(),model.getPileTotal());
+        view.clearHandlers();
     }
 
 

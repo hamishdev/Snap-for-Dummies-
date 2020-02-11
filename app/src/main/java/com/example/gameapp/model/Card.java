@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class Card implements Serializable {
 
     public enum Value{
-        ACE,TWO,THREE,FOUR,FIVE,SIX,SEVEN,EIGHT,NINE,TEN,JACK,QUEEN,KING
+        A,TWO,THREE,FOUR,FIVE,SIX,SEVEN,EIGHT,NINE,TEN,J,Q,K
     }
 
     public enum Suit{
@@ -30,5 +30,15 @@ public class Card implements Serializable {
 
     public int getLogicValue(){
         return value.ordinal() +1;
+    }
+
+    public String getUiValue(){
+        if(value.ordinal()==0){
+            return value.toString();
+        }
+        if (0<value.ordinal()&&value.ordinal()<10){
+            return String.valueOf(value.ordinal()+1);
+        }
+        return value.toString();
     }
 }

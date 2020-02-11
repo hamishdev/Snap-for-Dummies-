@@ -1,31 +1,48 @@
 package com.example.gameapp.model;
 
+import android.widget.Chronometer;
+
+import androidx.databinding.ObservableBoolean;
+import androidx.databinding.ObservableField;
+
 import com.example.gameapp.model.cardcollections.PlayingPile;
+
+import java.io.Console;
 import java.io.Serializable;
+import java.util.Queue;
+import java.util.Stack;
+
+import static java.lang.System.currentTimeMillis;
 
 
-public class Level implements Serializable{
+public class Level{
 
 
-    Turn turn;
+
     Deck deck;
-    Player player1;
-    Player computer;
+    public Player player1;
+    public Player computer;
     PlayingPile playingPile;
-    int levelNumber;
+    public final ObservableBoolean playersturn = new ObservableBoolean();
+    public long startTime;
+    public long stopTime;
+    public Stack<Long> times;
     public boolean playerWon; //To set hackily for debugging purposes
+    public long playerDelay;
 
     public Level(){
-
 
         player1=new Player();
         computer= new Player();
         deck = new Deck();
         deck.deal(player1,computer);
         playingPile = new PlayingPile();
-        
-        turn = Turn.PLAYER;
+        playersturn.set(true);
         playerWon=false;
+        startTime=0;
+        stopTime=0;
+        times =new Stack();
+        playerDelay=0;
 
     }
 
@@ -45,7 +62,34 @@ public class Level implements Serializable{
         return playingPile.getTopCard();
     }
 
-    enum Turn{COMPUTER,PLAYER}
+    public void stopComputerTimer() {
+        stopTime = currentTimeMillis();
+        playerDelay = stopTime-startTime;
+        /*if(times.size()>5){
+            times.pop();
+            times.add(playerDelay);
+        }
+        else times.add(playerDelay);
+        */
+
+
+    }
+
+    public int getPlayerDelay() {
+        if(startTime==0||stopTime==0){
+            return 1500;
+        }
+        //If too long return a proportional delay to players delay but not very long.
+        return (int)playerDelay<3000 ? (int)playerDelay: (int) (3000 + Math.sqrt((int) playerDelay));
+    }
+
+    public void startComputerTimer() {
+        startTime = currentTimeMillis();
+
+
+    }
+
+    public enum Turn{COMPUTER,PLAYER}
 
     //Just have players turn so that can only be binary player or Computers turn
     public boolean isPlayersTurn(){
@@ -56,13 +100,14 @@ public class Level implements Serializable{
             return true;
         }
         else
-        return(turn.equals(Turn.PLAYER));
+        return(playersturn.get());
     }
+
+
 
     public int getCompTotal() {
         return computer.hand.size();
     }
-
     public int getPlayerTotal() {
         return player1.hand.size();
     }
@@ -76,12 +121,14 @@ public class Level implements Serializable{
     Perform Card actions
      */
     public boolean flipFromPlayerHand(){
-        if(!levelFinished()&&!player1.hand.isEmpty()&&isPlayersTurn()) { //if can still flip, and has cards in hand, and is their turn
-           player1.hand.move(player1.hand.getTopCard(), playingPile);
-           endTurn();
-           return true;
+        if (isPlayersTurn())
+            if (!player1.hand.isEmpty())
+                if (!levelFinished()) { //if can still flip, and has cards in hand, and is their turn
+                    player1.hand.move(player1.hand.getTopCard(), playingPile);
+                    endTurn();
+                    return true;
 
-        }
+                }
         return false;
     }
 
@@ -95,6 +142,7 @@ public class Level implements Serializable{
     }
 
     public boolean playerSnap(){
+        resetDelay();
         if(!levelFinished()) {
             if (checkSnap()) { //valid snap - get cards
                 winsCards("player");
@@ -107,6 +155,7 @@ public class Level implements Serializable{
         return false;
     }
     public boolean computerSnap(){
+        resetDelay();
         if(!levelFinished()) {
             if (checkSnap()) { //valid snap
                 // - get cards
@@ -118,6 +167,11 @@ public class Level implements Serializable{
             }
         }
         return false;
+    }
+
+    public void resetDelay(){
+        stopTime=0;
+        startTime=0;
     }
     //chANGES TURN TO WHOEVER JUST WON THE CARDS
     public void winsCards(String player){
@@ -144,17 +198,17 @@ public class Level implements Serializable{
 
     public void setTurn(String player){
         switch (player){
-            case "player": turn =Turn.PLAYER;
+            case "player": playersturn.set(true);
             break;
-            case "computer": turn = Turn.COMPUTER;
+            case "computer": playersturn.set(false);
             break;
         }
     }
     public void endTurn(){
         if(isPlayersTurn()){
-            turn = Turn.COMPUTER;
+            playersturn.set(false);
         }
-        else turn = Turn.PLAYER;
+        else playersturn.set(true);
     }
 
     public Deck getDeck(){
@@ -168,20 +222,25 @@ public class Level implements Serializable{
     public boolean checkSnap(){
         Card card = playingPile.getTopCard();
         Card prevCard = playingPile.getPreviousCard();
-        if(card==null||prevCard==null){
+        if(card==null){
             return false;
         }
-        int stackCount = playingPile.getPosition(); //Positions going from 1-13
 
-        int cardValue = card.value.ordinal()+1;
-        int prevValue = prevCard.getLogicValue();
+        //if same number
+        int cardValue = card.getLogicValue();
+        int stackCount = playingPile.getPosition(); //Positions going from 1-13
         if(cardValue==stackCount){
             return true;
         }
-        if(cardValue==prevValue){
-            return true;
+
+        //if snap
+        if(prevCard!=null) {
+            int prevValue = prevCard.getLogicValue();
+            if(cardValue==prevValue){
+                return true;
+            }
         }
-        else return false;
+        return false;
     }
 
     public void winLevel(){

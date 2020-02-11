@@ -2,6 +2,7 @@ package com.example.gameapp.model;
 
 import androidx.databinding.ObservableInt;
 
+
 import java.io.Serializable;
 
 public class LevelSelector implements Serializable {

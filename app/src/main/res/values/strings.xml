@@ -2,4 +2,9 @@
     <string name="app_name">GameApp</string>
     <string name="_9">9</string>
     <string name="_3">3</string>
+    <string name="lock">🔒</string>
+    <string name="player">player</string>
+    <string name="computer">computer</string>
+    <string name="spare">🔒</string>
+
 </resources>

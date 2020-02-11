@@ -9,7 +9,10 @@ public interface LevelsView {
 
     void gameOver(boolean playerWon);
 
-    void computerFlip();
+    void computerFlip(int delay);
 
     void computerSnapIfCan();
+
+    void clearHandlers();
+
 }
