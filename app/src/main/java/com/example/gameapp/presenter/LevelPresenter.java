@@ -40,7 +40,7 @@ public class LevelPresenter implements Presenter, Serializable {
             view.computerSnapIfCan();
         }
         //Computer tries to flip even when they flip
-        else if(!model.isPlayersTurn()){
+        else if(!model.playersturn.get()){
             view.computerFlip(model.getPlayerDelay());
         }
     }

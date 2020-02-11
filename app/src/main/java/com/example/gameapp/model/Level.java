@@ -5,6 +5,7 @@ import android.widget.Chronometer;
 import androidx.databinding.ObservableBoolean;
 import androidx.databinding.ObservableField;
 
+import com.example.gameapp.R;
 import com.example.gameapp.model.cardcollections.PlayingPile;
 
 import java.io.Console;
@@ -23,7 +24,20 @@ public class Level{
     public Player player1;
     public Player computer;
     PlayingPile playingPile;
-    public final ObservableBoolean playersturn = new ObservableBoolean();
+    public final ObservableBoolean playersturn = new ObservableBoolean() {
+        @Override
+        public void set(boolean value){
+            if(player1.hand.isEmpty()){
+                super.set(false);
+            }
+            else if(computer.hand.isEmpty()){
+                super.set(true);
+            }
+            else{
+                super.set(value);
+            }
+        }
+    };
     public long startTime;
     public long stopTime;
     public Stack<Long> times;
@@ -89,20 +103,6 @@ public class Level{
 
     }
 
-    public enum Turn{COMPUTER,PLAYER}
-
-    //Just have players turn so that can only be binary player or Computers turn
-    public boolean isPlayersTurn(){
-        if(player1.hand.isEmpty()){
-            return false;
-        }
-        if(computer.hand.isEmpty()){
-            return true;
-        }
-        else
-        return(playersturn.get());
-    }
-
 
 
     public int getCompTotal() {
@@ -121,7 +121,7 @@ public class Level{
     Perform Card actions
      */
     public boolean flipFromPlayerHand(){
-        if (isPlayersTurn())
+        if (playersturn.get())
             if (!player1.hand.isEmpty())
                 if (!levelFinished()) { //if can still flip, and has cards in hand, and is their turn
                     player1.hand.move(player1.hand.getTopCard(), playingPile);
@@ -133,11 +133,13 @@ public class Level{
     }
 
     public boolean flipFromComputerHand(){
-        if(!levelFinished()&&!computer.hand.isEmpty()&&!isPlayersTurn()) { //if can still flip, and has cards in hand, and is their turn
-            computer.hand.move(computer.hand.getTopCard(), playingPile);
-            endTurn();
-            return true;
-        }
+        if (!playersturn.get())
+            if (!computer.hand.isEmpty())
+                if (!levelFinished()) { //if can still flip, and has cards in hand, and is their turn
+                    computer.hand.move(computer.hand.getTopCard(), playingPile);
+                    endTurn();
+                    return true;
+                }
         return false;
     }
 
@@ -191,8 +193,6 @@ public class Level{
                     e.printStackTrace();
                 }
         }
-
-
     }
 
 
@@ -205,14 +205,10 @@ public class Level{
         }
     }
     public void endTurn(){
-        if(isPlayersTurn()){
+        if(playersturn.get()){
             playersturn.set(false);
         }
         else playersturn.set(true);
-    }
-
-    public Deck getDeck(){
-        return deck;
     }
 
 

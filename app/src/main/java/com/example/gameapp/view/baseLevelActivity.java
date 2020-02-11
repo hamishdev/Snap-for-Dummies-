@@ -74,6 +74,7 @@ public abstract class baseLevelActivity extends Activity implements LevelsView {
     //COMPUTER AI
 
     public void computerSnapIfCan(int delay){
+        int randomExtraDelay = (int)(Math.random() * 250);
         compSnapHandler.postDelayed(new Runnable() {
 
             @Override
@@ -82,7 +83,7 @@ public abstract class baseLevelActivity extends Activity implements LevelsView {
                 presenter.newTurn();
             }
 
-        }, delay);
+        }, delay+ randomExtraDelay);
     }
 
     public void computerFlip(int delay){
