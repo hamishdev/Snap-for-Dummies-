@@ -2,10 +2,12 @@ package com.example.gameapp.view;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.ContactsContract;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -17,6 +19,7 @@ import com.example.gameapp.model.Level;
 import com.example.gameapp.model.cardcollections.Hand;
 import com.example.gameapp.presenter.LevelPresenter;
 import com.example.gameapp.R;
+import com.github.jinatonic.confetti.CommonConfetti;
 
 public abstract class baseLevelActivity extends Activity implements LevelsView {
 
@@ -154,14 +157,11 @@ public abstract class baseLevelActivity extends Activity implements LevelsView {
     }
 
     public void postWonMessage(){
-        updateTextView("You won!!!",R.id.computerHand);
         updateTextView("You won!!!",R.id.stack);
-        updateTextView("You won!!!",R.id.compPoints);
     }
 
     public void postLostMessage(){
         updateTextView("You lost...",R.id.stack);
-        updateTextView("You lost...",R.id.playerPoints);
     }
 
     public void updateTextView(String toThis, int viewID) {
@@ -187,7 +187,15 @@ public abstract class baseLevelActivity extends Activity implements LevelsView {
 //---set the data to pass back---
         data.putExtra("win",playerWon);
         setResult(RESULT_OK, data);
-        finish();
+        ViewGroup container = findViewById(R.id.level_1_view);
+        CommonConfetti.rainingConfetti(container,new int[]{Color.RED,Color.YELLOW,Color.BLUE}).infinite();
+        new Handler().postDelayed(new Runnable(){
+            @Override
+            public void run() {
+                finish();
+            }
+        }, 10000);
+
     }
 
     @Override

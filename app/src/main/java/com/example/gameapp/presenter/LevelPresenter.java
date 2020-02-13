@@ -75,6 +75,7 @@ public class LevelPresenter implements Presenter, Serializable {
     }
 
     public void gameOver(){
+
         view.gameOver(model.playerWon());// boolean whether player has won
     }
 
