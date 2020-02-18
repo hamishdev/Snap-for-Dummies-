@@ -3,14 +3,19 @@ package com.example.gameapp.view;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.AnimationDrawable;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.ContactsContract;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 
 import com.example.gameapp.databinding.ActivityLevel1Binding;
@@ -31,6 +36,9 @@ public abstract class baseLevelActivity extends Activity implements LevelsView {
     Button winGame_button;
     Handler compFlipHandler;
     Handler compSnapHandler;
+    ImageView img2;
+    AnimationDrawable frameAnimation;
+    AnimationDrawable frameAnimation2;
 
     @Override
     public void onCreate(Bundle bundle) {
@@ -47,11 +55,29 @@ public abstract class baseLevelActivity extends Activity implements LevelsView {
         flipCard_button = (Button) findViewById(R.id.flip_card);
         winGame_button = (Button) findViewById(R.id.win_game);
 
+        ImageView img = (ImageView)findViewById(R.id.imageView);
+        img.setBackgroundResource(R.drawable.hand_snap);
+        frameAnimation = new AnimationDrawable();
+        frameAnimation = (AnimationDrawable) img.getBackground();
+
+        img2 = (ImageView)findViewById(R.id.imageView2);
+        img2.setBackgroundResource(R.drawable.comp_hand_snap);
+        frameAnimation2 = new AnimationDrawable();
+        frameAnimation2 = (AnimationDrawable) img2.getBackground();
+
+
+
+
+
 
         //BUTTON CLICKS
         snap_button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View arg0) {
                 //board.playerWon=true; //for debugging if want easy win
+                img.bringToFront();
+                frameAnimation.stop();
+                frameAnimation.start();
+
                 presenter.onPlayerSnap();
                 presenter.newTurn();
             }
@@ -73,7 +99,11 @@ public abstract class baseLevelActivity extends Activity implements LevelsView {
     }
 
 
+public void onStart() {
 
+    super.onStart();
+    frameAnimation.stop();
+}
     //COMPUTER AI
 
     public void computerSnapIfCan(int delay){
@@ -82,6 +112,9 @@ public abstract class baseLevelActivity extends Activity implements LevelsView {
 
             @Override
             public void run() {
+                img2.bringToFront();
+                frameAnimation2.stop();
+                frameAnimation2.start();
                 presenter.computerSnapIfCan();
                 presenter.newTurn();
             }
@@ -194,7 +227,7 @@ public abstract class baseLevelActivity extends Activity implements LevelsView {
             public void run() {
                 finish();
             }
-        }, 10000);
+        }, 6000);
 
     }
 

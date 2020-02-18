@@ -19,7 +19,7 @@ public class SplashScreenActivity extends Activity {
             @Override
             public void run(){
                 try{
-                sleep(1500);
+                sleep(5000);
 
                 }
                 catch(Exception e){

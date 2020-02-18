@@ -14,6 +14,7 @@ public class LevelPresenter implements Presenter, Serializable {
     public LevelPresenter(LevelsView _view, Level level){
         this.view = _view;
         model = level;
+
     }
 
     // Update

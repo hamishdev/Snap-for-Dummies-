@@ -32,6 +32,17 @@ public class LevelSelectPresenter implements Presenter, Serializable {
     }
 
     public void levelEnded(boolean win) {
-        model.wonLevel(win);
+        model.finishLevel(win);
+        wonGame();
+
     }
+
+    public void wonGame(){
+        if(model.wonGame()){
+            view.postConfetti();
+        }
+    }
+
+
+
 }

@@ -5,4 +5,11 @@
     <color name="colorAccent">#D81B60</color>
     <color name="white">#FFFFFF</color>
     <color name="gray">#C0C0C0</color>
+
+
+    <color name="gold_dark">#946335</color>
+    <color name="gold_med">#ab804b</color>
+    <color name="gold">#cea774</color>
+    <color name="gold_light">#edd3b2</color>
+
 </resources>

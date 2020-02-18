@@ -9,6 +9,7 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/levelselect_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -22,7 +23,7 @@
             android:tag="3"
             android:text="@{levelSelector.levelUpTo&gt;=3 ? String.valueOf(3) : @string/lock}"
             android:background="@{levelSelector.levelUpTo&gt;=3 ? @color/white : @color/gray}"
-
+            android:textSize="36sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
@@ -36,6 +37,7 @@
             android:background="@{levelSelector.levelUpTo&gt;=2 ? @color/white : @color/gray}"
             android:tag="2"
             android:text="@{levelSelector.levelUpTo&gt;=2 ? String.valueOf(2) : @string/lock}"
+            android:textSize="36sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
@@ -49,12 +51,13 @@
             android:backgroundTint="#FFFFFF"
             android:tag="1"
             android:text="1"
+            android:textSize="36sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-   
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

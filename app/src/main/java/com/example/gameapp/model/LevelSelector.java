@@ -9,11 +9,18 @@ public class LevelSelector implements Serializable {
 
     Level[] levels;
     public int currentLevel;
+    public final int totalLevels=3;
     public final ObservableInt levelUpTo = new ObservableInt();
 
     public LevelSelector(){
         //levels.add
         levelUpTo.set(1);
+
+    }
+    public LevelSelector(int level){
+        //levels.add
+        levelUpTo.set(level);
+
     }
 
     //levelNumber will correlate to speed
@@ -28,11 +35,17 @@ public class LevelSelector implements Serializable {
 
 
 
-    public void wonLevel(boolean win) {
+    public void finishLevel(boolean winStatus) {
         //won the currentToBeat level
-        if (win&&currentLevel==levelUpTo.get()) {
+        if (winStatus&&currentLevel==levelUpTo.get()) {
             levelUpTo.set(levelUpTo.get() + 1);
-
         }
+    }
+
+    public boolean wonGame(){
+        if(levelUpTo.get()>totalLevels){
+            return true;
+        }
+        return false;
     }
 }

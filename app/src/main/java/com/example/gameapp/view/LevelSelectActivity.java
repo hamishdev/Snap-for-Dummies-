@@ -1,13 +1,22 @@
 package com.example.gameapp.view;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.Resources;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
+import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 
 //import androidx.databinding.DataBindingUtil;
 
+import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 
 
@@ -17,6 +26,7 @@ import com.example.gameapp.model.Level;
 import com.example.gameapp.model.LevelSelector;
 import com.example.gameapp.presenter.LevelSelectPresenter;
 import com.example.gameapp.R;
+import com.github.jinatonic.confetti.CommonConfetti;
 
 import java.util.ArrayList;
 
@@ -29,15 +39,21 @@ public class LevelSelectActivity extends Activity implements SnapLevelsView {
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        if (savedInstanceState == null) {
+
+        SharedPreferences settings = getSharedPreferences("saveState",MODE_PRIVATE);
+        int level = settings.getInt("level",0);
+        if (level == 0) {
             //gameState = savedInstanceState.getString(GAME_STATE_KEY);
             model = new LevelSelector();
         }
+        else{
+            model = new LevelSelector(level);
+        }
+
 
         presenter = new LevelSelectPresenter(this,model);
         ActivityLevelsSelectBinding binding = DataBindingUtil.setContentView(this,R.layout.activity_levels_select);
         binding.setLevelSelector(model);
-
         // Locate the level1button in activity_main.xml
 
         ArrayList<Button> buttons = new ArrayList<Button>() {
@@ -63,6 +79,35 @@ public class LevelSelectActivity extends Activity implements SnapLevelsView {
 
     }
 
+    @Override
+    public void onResume(){
+        super.onResume();
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                //Do something after 100ms
+                presenter.wonGame();
+            }
+        }, 200);
+
+
+    }
+    protected void onPause()
+    {
+        super.onPause();
+
+        // Store values between instances here
+        SharedPreferences preferences = getSharedPreferences("saveState",MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();  // Put the values from the UI
+        int level = model.levelUpTo.get();
+
+        editor.putInt("level", level);
+        // Commit to storage
+        editor.commit();
+    }
+
+
     public void onLevelClicked(int levelNumber){
 
         presenter.levelSelected(levelNumber);
@@ -74,8 +119,6 @@ public class LevelSelectActivity extends Activity implements SnapLevelsView {
     public void startLevel(int levelNumber){
         Intent levelIntent = getLevelIntent(levelNumber);
         startActivityForResult(levelIntent,START_LEVEL);
-
-
 
     }
 
@@ -103,6 +146,18 @@ public class LevelSelectActivity extends Activity implements SnapLevelsView {
 
         }
         return null;
+    }
+
+    public void postConfetti(){
+        int[] colorArray = new int[]{
+                ContextCompat.getColor(this, R.color.gold),
+                ContextCompat.getColor(this, R.color.gold_dark),
+                ContextCompat.getColor(this, R.color.gold_light)
+        };
+        LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        ViewGroup container = findViewById(R.id.levelselect_view);
+        CommonConfetti.rainingConfetti(container,colorArray).infinite();
+
     }
 
 
