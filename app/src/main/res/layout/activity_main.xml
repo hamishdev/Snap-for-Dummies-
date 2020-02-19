@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".view.main.MainActivity">
+    android:layout_height="match_parent">
 
 
     <Button
@@ -26,7 +25,7 @@
         android:layout_height="75dp"
         android:layout_marginStart="136dp"
         android:layout_marginBottom="220dp"
-        android:text="Credits"
+        android:text="Rules"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
