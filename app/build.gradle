@@ -7,7 +7,7 @@ android {
         enabled = true
     }
     defaultConfig {
-        applicationId "com.example.gameapp"
+        applicationId "pretence.gameapp"
         minSdkVersion 24
         targetSdkVersion 29
         versionCode 1

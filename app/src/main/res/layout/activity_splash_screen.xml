@@ -3,31 +3,38 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/king">
+    android:layout_height="match_parent">
+
+
+
+    <ImageView
+        android:scaleType="centerCrop"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        android:src="@drawable/king" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="370dp"
         android:layout_height="190dp"
-        android:layout_marginStart="24dp"
         android:fontFamily="cursive"
         android:text="Snap for "
         android:textAlignment="center"
         android:textColor="#000000"
         android:textSize="70sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.609"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.029" />
 
     <TextView
         android:id="@+id/textView3"
         android:layout_width="307dp"
         android:layout_height="183dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="644dp"
         android:fontFamily="cursive"
         android:rotation="180"
         android:text="Dummies"
@@ -37,7 +44,6 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.409"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
